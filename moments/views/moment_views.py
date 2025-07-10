@@ -70,12 +70,15 @@ def moment_detail_view(request, moment_id):
     comment_count = comments.count()
     like_count = Like.objects.filter(moment=moment).count()
 
+    if_contents = If.objects.filter(moment_id=moment).order_by('created_date')
+
     return render(request, 'moment_detail.html', {
         'moment': moment,
         'images': images,
         'comments': comments,
         'comment_count': comment_count, # 댓글수도 넘겨줌
-        'like_count': like_count
+        'like_count': like_count,
+        'if_contents': if_contents
     })
 
 def moment_update_view(request, moment_id):
