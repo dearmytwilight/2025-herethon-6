@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,8 +66,10 @@
         <span class="comment_count">{{ comment_count }}</span>
       </div>
       <div class="like_icon">
-        <img src="../img/favorite.png" alt="" id="likeBtn">
-        <span id="likeCount">{{ like_count }}</span>
+          <img src="{% static '..img/favorite.png' %}" alt="좋아요" id="likeBtn" data-moment-id="{{ moment.moment_id }}" style="cursor:pointer;">
+          <span id="likeCount">{{ like_count }}</span>
+      </div>
+
 
       </div>
     </div>
@@ -117,21 +121,49 @@ menu.addEventListener("click", (e) => {
   }
 });
 
-// 좋아요 기능
+
 const likeBtn = document.getElementById("likeBtn");
 const likeCount = document.getElementById("likeCount");
+const momentId = likeBtn.dataset.momentId;
 
-let liked = false;
-let count = parseInt(likeCount.textContent);
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
 likeBtn.addEventListener("click", () => {
-  liked = !liked;
-  count += liked ? 1 : -1;
-  likeCount.textContent = count;
-  likeBtn.src = liked ? "../img/favorite_filled.png" : "../img/favorite.png";
+    fetch(`/moments/${momentId}/toggle_like/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCookie('csrftoken'),
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+        likeBtn.src = data.liked ? "{% static 'img/favorite_filled.png' %}" : "{% static 'img/favorite.png' %}";
+        likeCount.textContent = data.like_count;
+    })
+    .catch(err => {
+        console.error('좋아요 요청 실패', err);
+    });
 });
+</script>
 
-    
- </script>
 </body>
 </html>
