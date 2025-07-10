@@ -21,23 +21,7 @@
         </div>
         <div class="name"><p>바그바그</p></div>
       </div>
-      <div class="category">
-        <img src="../../static/assets/imges/Group 85.png" id="categoryIcon" alt="카테고리 아이콘"> 
-        <div id="selectedCategory" class="hidden"></div>
-        <div class="category-box hidden" id="categoryBox">
-          <img src="../../static/assets/imges/Group 86.png" alt="카테고리 배경" class="category-bg">
-          <ul class="category-menu" id="categoryMenu">
-            <li>연애</li>
-            <li>인간관계</li>
-            <li>취업/커리어</li>
-            <li>건강</li>
-            <li>학업</li>
-            <li>취미</li>
-            <li>소비</li>
-            <li>기타</li>
-          </ul>
-        </div>
-      </div>
+      
     </div>
     <div class="text">
       <div class="text1">
@@ -102,24 +86,6 @@ function handleSubmit() {
   document.getElementById("regret").removeAttribute("readonly");
 }
 
-// 카테고리 메뉴 기능
-const icon = document.getElementById("categoryIcon");
-const box = document.getElementById("categoryBox");
-const menu = document.getElementById("categoryMenu");
-const selectedText = document.getElementById("selectedCategory");
-
-icon.addEventListener("click", () => {
-  box.classList.toggle("hidden");
-});
-
-menu.addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    selectedText.textContent = e.target.textContent;
-    selectedText.classList.remove("hidden");
-    icon.classList.add("hidden");
-    box.classList.add("hidden");
-  }
-});
 
 
 const likeBtn = document.getElementById("likeBtn");
