@@ -10,6 +10,7 @@ from urllib.parse import urlparse
 from django.contrib.auth import get_user_model
 from django.db.models import Count
 from ..utils.keyword_utils import get_weekly_keywords_data, save_weekly_keywords
+from django.http import JsonResponse
 
 User = get_user_model()
 
@@ -80,6 +81,27 @@ def moment_detail_view(request, moment_id):
 def moment_update_view(request, moment_id):
     moment = get_object_or_404(Moment, moment_id=moment_id)
     return render(request, 'moment_update.html', {'moment': moment})
+
+
+def toggle_like(request, moment_id):
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST 요청만 허용됩니다.'}, status=405)
+
+    moment = get_object_or_404(Moment, pk=moment_id)
+    user = request.user
+
+    like, created = Like.objects.get_or_create(user=user, moment=moment)
+    if not created:
+        like.delete()
+        liked = False
+    else:
+        liked = True
+
+    like_count = Like.objects.filter(moment=moment).count()
+
+    return JsonResponse({'liked': liked, 'like_count': like_count})
+
+
 
 '''
 # 글 생성 or 목록조회 분기
