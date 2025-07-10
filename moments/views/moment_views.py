@@ -9,6 +9,7 @@ from ..image_utils import upload_to_s3, delete_from_s3
 from urllib.parse import urlparse
 from django.contrib.auth import get_user_model
 from django.db.models import Count
+from ..utils.keyword_utils import get_weekly_keywords_data, save_weekly_keywords
 
 User = get_user_model()
 
@@ -39,6 +40,8 @@ def moment_create_view(request):
 
 def moment_list_view(request, category_id):
     # category_id를 직접 받아서 필터링
+    save_weekly_keywords()
+    category = Category.objects.get(pk=category_id)
     moments = Moment.objects.filter(category_id=category_id)
     
     sort = request.GET.get('sort', 'latest')
@@ -47,15 +50,21 @@ def moment_list_view(request, category_id):
     else:  
         moments = moments.order_by('-created_date')
     
+    top_keywords = get_weekly_keywords_data(category_id)
+    
+    ifs = If.objects.filter(moment_id__category_id=category_id).order_by('-created_date')[:7]
     return render(request, 'moment_list.html', {
         'moments': moments,
-        'selected_category': category_id,  # 필요하면 이름으로 바꿔줄 수도 있음
+        'ifs': ifs,  
+        'selected_category': category,
         'sort': sort,
+        'top_keywords': top_keywords,
+
     })
 
 def moment_detail_view(request, moment_id):
     moment = get_object_or_404(Moment, moment_id=moment_id)
-    images = Image.objects.filter(moment_id=moment)       
+    images = Image.objects.filter(moment_id=moment_id)       
     comments = Comment.objects.filter(moment_id=moment)    
     comment_count = comments.count()
     like_count = Like.objects.filter(moment=moment).count()
@@ -113,7 +122,6 @@ def moment_create(request):
     if_content = request.POST.get('if_content')
     category_id = request.POST.get('category_id')
 
-
     # 필수 항목 검사
     if not all([title, content, if_content, category_id]):
         return response_error("필수 항목이 누락되었습니다", code=400)
@@ -160,7 +168,9 @@ def moment_create(request):
         data = { 
             "moment_id": moment.moment_id,
         }
+
         #return response_success(data, message="글 작성 완료")
+
         return redirect(f"/pages/moments/{moment.moment_id}/detail")
         
 
@@ -204,6 +214,7 @@ def moment_detail(request, moment_id):
     try:
         # Moment 조회 (+ user, category join)
         moment = Moment.objects.select_related('user_id', 'category_id').get(moment_id=moment_id)
+
 
         # 연결된 If 가져오기
         if_content = moment.if_moment.if_content  

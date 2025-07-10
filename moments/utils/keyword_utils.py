@@ -2,29 +2,6 @@ from konlpy.tag import Hannanum
 from collections import Counter
 from django.views.decorators.csrf import csrf_exempt
 
-sample_texts = [
-    "내가 다시 취업 준비를 시작한다면 더 철저하게 할 거야.",
-    "취업 면접에서 실수하지 않도록 다시 돌아간다면 준비를 더 열심히 하겠다.",
-    "내가 다시 돌아간다면 이력서 작성에 더 신경 쓸 거야.",
-    "취업 경쟁이 치열해서 다시 준비한다면 전략을 바꿀 거야.",
-    "다시 돌아간다면 인턴 경험을 더 많이 쌓고 싶어.",
-    "내가 취업 준비를 다시 한다면 자기소개서를 완벽하게 준비할 거야.",
-    "다시 돌아가서 취업 박람회도 적극적으로 참여할 거야.",
-    "내가 다시 돌아간다면 네트워킹에 더 힘쓸 거야.",
-    "취업 준비 과정에서 부족했던 점을 보완하려고 다시 시작할 거야.",
-    "다시 돌아간다면 면접관 앞에서 당황하지 않도록 연습할 거야.",
-    "내가 다시 돌아간다면 직무 분석을 더 철저히 했을 거야.",
-    "다시 돌아간다면 기업 분석에 더 많은 시간을 투자할 거야.",
-    "내가 다시 준비한다면 자소서를 회사별로 더 맞춤화했을 거야.",
-    "취업 스터디에 일찍 참여해서 정보를 나눴을 거야.",
-    "다시 돌아간다면 포트폴리오를 미리미리 준비했을 거야.",
-    "내가 돌아간다면 커리어 상담을 더 자주 받았을 거야.",
-    "다시 돌아간다면 자격증 하나라도 더 땄을 거야.",
-    "내가 다시 시작한다면 관심 기업의 인재상도 더 꼼꼼히 봤을 거야.",
-    "다시 돌아간다면 취업 사이트 활용을 더 적극적으로 했을 거야.",
-    "내가 다시 돌아간다면 면접 후기나 사례들을 더 많이 찾아봤을 거야."
-]
-
 def extract_top_keywords_hannanum(texts, top_n=3):
     hannanum = Hannanum()
     all_nouns = []
@@ -90,3 +67,25 @@ def save_weekly_keywords():
         print(f"새로운 WeeklyTop3Keyword 저장됨: {entry}")
 
     print("주간 키워드 저장 완료")
+
+def get_weekly_keywords_data(category_id):
+    from django.utils.timezone import now
+    from datetime import timedelta
+    from moments.models import Category, WeeklyTop3Keyword
+
+    today = now().date()
+    week_start = today - timedelta(days=today.weekday())
+
+    try:
+        category = Category.objects.get(pk=category_id)
+    except Category.DoesNotExist:
+        return []
+
+    try:
+        weekly_data = WeeklyTop3Keyword.objects.get(week_start=week_start, category=category)
+        data = weekly_data.keywords
+    except WeeklyTop3Keyword.DoesNotExist:
+        data = []
+
+    return data
+
