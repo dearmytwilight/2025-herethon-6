@@ -88,3 +88,4 @@ def get_weekly_keywords_data(category_id):
         data = []
 
     return data
+

@@ -59,6 +59,7 @@ def moment_list_view(request, category_id):
         'selected_category': category,
         'sort': sort,
         'top_keywords': top_keywords,
+
     })
 
 def moment_detail_view(request, moment_id):
@@ -120,8 +121,6 @@ def moment_create(request):
     content = request.POST.get('content')
     if_content = request.POST.get('if_content')
     category_id = request.POST.get('category_id')
-    
-
 
     # 필수 항목 검사
     if not all([title, content, if_content, category_id]):
@@ -169,6 +168,9 @@ def moment_create(request):
         data = { 
             "moment_id": moment.moment_id,
         }
+
+        #return response_success(data, message="글 작성 완료")
+
         return redirect(f"/pages/moments/{moment.moment_id}/detail")
         
 
@@ -213,7 +215,7 @@ def moment_detail(request, moment_id):
         # Moment 조회 (+ user, category join)
         moment = Moment.objects.select_related('user_id', 'category_id').get(moment_id=moment_id)
 
-    
+
         # 연결된 If 가져오기
         if_content = moment.if_moment.if_content  
 
