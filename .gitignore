@@ -12,4 +12,9 @@ conf.py
 .jpeg
 .gif
 .myvenv/
+.venv/
+.myvenv\
+.venv\
+myvenv
+venv
 test.py

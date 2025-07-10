@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
     <link rel="stylesheet" href="{% static 'css/common/container.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 </head>
 <body>
     <div class="container">
@@ -38,13 +38,36 @@
                     <img src="{% static 'assets/fire.svg' %}" />
                     전체 인기글
                 </div>
-                <div class="entire"></div>
+                <div class="entire">
+                    {% for moment in top3_overall %}
+                        <div class="moment-item">
+                            <a href="{% url 'moments:moment_detail_view' moment.moment_id %}">{{ moment.title }}</a>
+                        </div>
+                    {% empty %}
+                        <p>인기글이 없습니다.</p>
+                    {% endfor %}
+                </div>
             </div>
 
             <div class="name">
                 각 분야의 <span>TOP3</span> 경험글
             </div>
-            <div class="post"></div>
+            <div class="post">
+                {% for category, moments in top3_by_category.items %}
+                    <h3>{{ category.name }}</h3>
+                    <ul>
+                        {% for moment in moments %}
+                            <li>
+                                <a href="{% url 'moments:moment_detail_view' moment.moment_id %}">
+                                    <strong>{{ moment.title }}</strong></a>
+                                <span>{{ moment.content|truncatechars:50 }}</span>  <!-- 본문 50자만 표시 -->
+                            </li>
+                        {% empty %}
+                            <li>게시물이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
         </div>
 
         <!-- ✅ 내비바는 스크롤 영역 밖에 -->
@@ -53,7 +76,7 @@
         </div>
     </div>
     <script>
-        const category = "{{ selected_category }}"
+        const category = parseInt("{{ selected_category }}");
     </script>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
