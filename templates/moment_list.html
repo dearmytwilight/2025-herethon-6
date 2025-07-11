@@ -8,7 +8,6 @@
 <body>
   <div class="container">
     <div class="scroll">
-
       <div class="header">
         <div class="top">
           <img src="{% static 'assets/logo.svg' %}" alt="logo">
@@ -52,7 +51,7 @@
           {% for if in ifs %}
           <div class="if-item">
             <div class="profile">
-              <img class="profile-img" src="{% static 'assets/fire.svg' %}" alt="profile">
+              <img class="profile-img" id="small" src="{% static 'assets/fire.svg' %}" alt="profile">
             </div>
             <div class="if-item-box">
               <a href="{% url 'moments:moment_detail_view' if.moment_id_id %}">{{ if.if_content }}</a>
@@ -97,21 +96,38 @@
           <!-- 햄버거 메뉴 오버레이 & 사이드 메뉴 -->
     <div id="menuOverlay" class="menu-overlay"></div>
 
-    <div id="sideMenu" class="side-menu">
+        <div id="sideMenu" class="side-menu">
       <ul class="menu-items">
-        <li onclick="location.href='{}'">연애</li>
-        <li onclick="location.href='{}'">인간관계</li>
-        <li onclick="location.href='{}'">취업/커리어</li>
-        <li onclick="location.href='{}'">건강</li>
-        <li onclick="location.href='{}'">학업</li>
-        <li onclick="location.href='{}'">취미</li>
-        <li onclick="location.href='{}'">소비</li>
-        <li onclick="location.href='{}'">기타</li>
-        <li onclick="location.href='/users/profile/'">마이페이지</li>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 1 %}">연애</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 2 %}">인간관계</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 3 %}">취업/커리어</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 4 %}">건강</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 5 %}">학업</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 6 %}">취미</a></li>        
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 7 %}">소비</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 8 %}">기타</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="/users/profile/">마이페이지</a></li>
+        </div>
       </ul>
       <div class="menu-logo">
-        <img src="{% static 'assets/logo.svg' %}" alt="Oopsie logo" />
-        <p>Oopsie</p>
+        <img src="{% static 'assets/logo2.svg' %}" alt="Oopsie logo" />
       </div>
     </div>
   </div> <!-- container 끝 -->
@@ -123,10 +139,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const randomProfileImages = [
-        "{% static 'assets/fire.svg' %}",
-        "{% static 'assets/home.svg' %}",
-        "{% static 'assets/profile.svg' %}",
-        "{% static 'assets/search.svg' %}"
+        "{% static 'assets/profile1.svg' %}",
+        "{% static 'assets/profile2.svg' %}",
+        "{% static 'assets/profile3.svg' %}",
+        "{% static 'assets/profile4.svg' %}"
       ];
 
       const profileImages = document.querySelectorAll('.profile-img');

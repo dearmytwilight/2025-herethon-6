@@ -3,161 +3,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ moment.title }}</title>
-    <link rel="stylesheet" href="{% static 'css/common/container.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/comment_write.css' %}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ moment.title }}</title>
+  <link rel="stylesheet" href="{% static 'css/common/container.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/comment_write.css' %}" />
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="back">
-                <a href="javascript:history.back()"><img src="{% static 'assets/imges/arrow_back.png' %}" alt="뒤로가기" /></a>
-            </div>
-            <div class="profile">
-                <div class="img">
-                    <img src="{{ moment.user.profile_img_url|default:'{% static \'assets/imges/Group 59.png\' %}' }}" alt="프로필 이미지" />
-                </div>
-                <div class="name">
-                    <p>{{ moment.user.username }}</p>
-                </div>
-            </div>
+  <div class="container">
+    <div class="header">
+      <div class="back">
+        <a href="javascript:history.back()">
+          <img src="{% static 'assets/imges/arrow_back.png' %}" alt="뒤로가기" />
+        </a>
+      </div>
+      <div class="profile">
+        <div class="img">
+            <img class="profile-img" src="{{ moment.user.profile_img_url|default:'{% static \'assets/imges/Group 59.png\' %}' }}" alt="프로필 이미지" />        </div>
+        <div class="name">
+          <p>{{ moment.user.username }}</p>
         </div>
-
-        <div class="text">
-            <div class="text1">
-                <p>{{ moment.title }}</p>
-            </div>
-            <div class="text2">
-                <p>{{ moment.created_date|date:"Y-m-d H:i" }}</p>
-            </div>
-        </div>
-
-        <div class="input">
-            <div class="input2">
-                <p>실패담</p>
-                <textarea id="failure" readonly>{{ moment.content }}</textarea>
-            </div>
-            <div class="input3">
-                <p>내가 만약 다시 돌아간다면?</p>
-                <textarea id="regret" readonly>{% if if_contents %}{{ if_contents.0.if_content }}{% else %}내용이 없습니다.{% endif %}</textarea>
-            </div>
-        </div>
-
-        <div class="favorite">
-            <img src="{% static 'assets/imges/favorite_filled.png' %}" alt="좋아요 아이콘" />
-        </div>
-
-        <div class="comment_header">
-            <div class="chat_icon">
-                <img src="{% static 'img/chat_bubble.png' %}" alt="댓글 아이콘" />
-                <span class="comment_count">{{ comment_count }}</span>
-            </div>
-            <div class="like_icon">
-                <img src="{% static 'img/favorite.png' %}" alt="좋아요" id="likeBtn" data-moment-id="{{ moment.moment_id }}" style="cursor:pointer;" />
-                <span id="likeCount">{{ like_count }}</span>
-            </div>
-        </div>
-
-        <div class="images">
-            {% for image in images %}
-            <img src="{{ image.image_url }}" alt="{{ image.image_name }}" />
-            {% endfor %}
-        </div>
-
-        
-        <!-- 💬 댓글 작성 폼 -->
-        {% if request.user.is_authenticated %}
-        <div id="comment_form" class="comment_write">
-        <form method="post" action="/moments/{{ moment.moment_id }}/comments/create/">
-            {% csrf_token %}
-            <input type="hidden" name="user_id" value="{{ request.user.id }}">
-            <textarea name="content" rows="3" placeholder="댓글을 작성하세요" required></textarea>
-            <button type="submit">작성</button>
-            
-        </form>
-        </div>
-        {% endif %}
-
-
-        <!-- 💬 댓글 목록 -->
-        <div class="comment">
-        {% for comment in comments %}
-        <div class="comment_item">
-            <div class="profile_comment">
-            <img src="{{ comment.user.profile_img_url|default:'{% static \'assets/imges/Group 66.png\' %}' }}" alt="댓글 프로필 이미지" />
-            </div>
-            <div class="comment_text">
-            <p>{{ comment.content }}</p>
-
-            {% if comment.user_id.id == request.user.id %}
-            
-            <!-- ✏️ 댓글 수정 form -->
-            <form method="post" action="/moments/{{ moment.moment_id }}/comments/{{ comment.comment_id }}/update/">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{ request.user.id }}">
-                <input type="text" name="content" value="{{ comment.content }}" required>
-                <button type="submit">수정</button>
-            </form>
-
-            <!-- ❌ 댓글 삭제 form -->
-            <form method="post" action="/moments/{{ moment.moment_id }}/comments/{{ comment.comment_id }}/delete/" style="margin-top: 5px;">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{ request.user.id }}">
-                <button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?')">삭제</button>
-            </form>
-            {% endif %}
-            </div>
-        </div>
-        {% empty %}
-        <p>댓글이 없습니다.</p>
-        {% endfor %}
-        </div>
+      </div>
     </div>
 
+    <div class="text">
+      <div class="text1">
+        <p>{{ moment.title }}</p>
+      </div>
+      <div class="text2">
+        <p>{{ moment.created_date|date:"Y-m-d H:i" }}</p>
+      </div>
+    </div>
+
+    <div class="input">
+      <div class="input2">
+        <p>실패담</p>
+        <textarea id="failure" readonly>{{ moment.content }}</textarea>
+      </div>
+      <div class="input3">
+        <p>내가 만약 다시 돌아간다면?</p>
+        <textarea id="regret" readonly>{% if if_contents %}{{ if_contents.0.if_content }}{% else %}내용이 없습니다.{% endif %}</textarea>
+      </div>
+    </div>
+
+    <div class="favorite">
+      <img src="{% static 'assets/imges/favorite_filled.png' %}" alt="좋아요 아이콘" />
+    </div>
+
+    <div class="comment_header">
+      <div class="chat_icon">
+        <img src="{% static 'assets/imges/chat_bubble.png' %}" alt="댓글 아이콘" />
+        <span class="comment_count">{{ comment_count }}</span>
+      </div>
+      <div class="like_icon">
+        <img src="{% static 'assets/imges/favorite.png' %}" alt="좋아요" id="likeBtn" data-moment-id="{{ moment.moment_id }}" style="cursor:pointer;" />
+        <span id="likeCount">{{ like_count }}</span>
+      </div>
+    </div>
+
+    <div class="images">
+      {% for image in images %}
+        <img src="{{ image.image_url }}" alt="{{ image.image_name }}" />
+      {% endfor %}
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <div id="comment_form" class="comment_write">
+      <form method="post" id="commentForm" action="/moments/{{ moment.moment_id }}/comments/create/">
+        {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ request.user.id }}">
+        <textarea name="content" id="commentInput" rows="3" placeholder="댓글을 작성하세요" required></textarea>
+        <button type="submit" class="send">
+          <img src="{% static 'assets/imges/send.png' %}" alt="보내기" />
+        </button>
+      </form>
+    </div>
+    {% endif %}
+
+    <div class="comment">
+      {% for comment in comments %}
+      <div class="comment_item">
+        <div class="profile_comment">
+          <img src="{{ comment.user.profile_img_url|default:'{% static \'assets/imges/Group 66.png\' %}' }}" />
+        </div>
+        <div class="comment_text">
+          <p>{{ comment.content }}</p>
+          {% if comment.user_id.id == request.user.id %}
+          <div class="comment_actions"> 
+            <form method="post" action="/moments/{{ moment.moment_id }}/comments/{{ comment.comment_id }}/update/">
+              {% csrf_token %}
+              <input type="hidden" name="user_id" value="{{ request.user.id }}">
+             <!-- <input type="text" name="content" value="{{ comment.content }}" required>-->
+              <button type="submit">수정</button>
+            </form>
+            <form method="post" action="/moments/{{ moment.moment_id }}/comments/{{ comment.comment_id }}/delete/">
+              {% csrf_token %}
+              <input type="hidden" name="user_id" value="{{ request.user.id }}">
+              <button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?')">삭제</button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+        <p>댓글이 없습니다.</p>
+      {% endfor %}
+    </div>
+  </div>
+
 <script>
-    const likeBtn = document.getElementById("likeBtn");
-    const likeCount = document.getElementById("likeCount");
-    const momentId = likeBtn.dataset.momentId;
+  const likeBtn = document.getElementById("likeBtn");
+  const likeCount = document.getElementById("likeCount");
+  const momentId = likeBtn.dataset.momentId;
 
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                cookie = cookie.trim();
-                if (cookie.startsWith(name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
         }
-        return cookieValue;
+      }
     }
+    return cookieValue;
+  }
 
-    likeBtn.addEventListener("click", () => {
-        fetch(`/moments/${momentId}/toggle_like/`, {
-            method: "POST",
-            headers: {
-                "X-CSRFToken": getCookie('csrftoken'),
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({})
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert(data.error);
-                return;
-            }
-            likeBtn.src = data.liked ? "{% static 'img/favorite_filled.png' %}" : "{% static 'img/favorite.png' %}";
-            likeCount.textContent = data.like_count;
-        })
-        .catch(err => {
-            console.error('좋아요 요청 실패', err);
-        });
+  likeBtn.addEventListener("click", () => {
+    fetch(`/moments/${momentId}/toggle_like/`, {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": getCookie('csrftoken'),
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
+      likeBtn.src = data.liked
+        ? "{% static 'assets/imges/favorite_filled.png' %}"
+        : "{% static 'assets/imges/favorite.png' %}";
+      likeCount.textContent = data.like_count;
+    })
+    .catch(err => {
+      console.error('좋아요 요청 실패', err);
     });
+  });
+
+  document.getElementById("commentForm")?.addEventListener("submit", function (event) {
+    const input = document.getElementById("commentInput");
+    if (!input.value.trim()) {
+      event.preventDefault();
+      alert("댓글을 입력해주세요.");
+    }
+  });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const randomProfileImages = [
+        "{% static 'assets/profile1.svg' %}",
+        "{% static 'assets/profile2.svg' %}",
+        "{% static 'assets/profile3.svg' %}",
+        "{% static 'assets/profile4.svg' %}"
+      ];
+
+      const profileImages = document.querySelectorAll('.profile-img');
+
+      profileImages.forEach(img => {
+        const randomIndex = Math.floor(Math.random() * randomProfileImages.length);
+        img.src = randomProfileImages[randomIndex];
+      });
+    });
+  </script>
 </body>
 </html>

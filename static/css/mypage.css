@@ -1,19 +1,14 @@
-.container {
-    width: 402px;
-    height: 874px;
-    background-color: #FFF;
-    margin: 0 auto;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start;
-    text-align: center;
+.container{
 }
 
 .profile{
     margin-top: 58px;
     font-weight: bold;
+}
+
+.profile p {
+    display: flex;
+    justify-content: center;
 }
 
 .mypage{
@@ -22,6 +17,7 @@
     font-size: 15px;
     font-weight: bold;
     gap: 30px;
+    margin-bottom: 67.5px;
 }
 
 .mypage_box{
@@ -35,7 +31,6 @@
 }
 
 .mypage_box ul {
-    left: -20px;
     position: relative;
     margin: 20px;
     display: flex;
@@ -45,8 +40,11 @@
 .section1, .section2, .section3, .section4 ,.section5{
     img{
         margin-bottom: -15px;
+        margin-left: 4px;
     }
 }
+
+
 
 .section1{
     margin-top: -10%;
@@ -100,9 +98,24 @@
   font-weight: bolder;
   margin-top: 15px;
   display: inline-block;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .link:visited {
   color: black;
   text-decoration: none;
+}
+
+.nb {
+    position: absolute;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

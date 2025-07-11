@@ -3,7 +3,7 @@
     height: 184px;
     flex-shrink: 0;
     background: #E0F1FF;
-    background-image: url(/images/main.svg);
+    background-image: url("../assets/sa.svg"); /* 상대 경로로 */    
     background-repeat: no-repeat;
     background-position: bottom;
     border-radius: 30px 30px 0 0;
@@ -146,6 +146,7 @@ line-height: normal;
     gap: 10px;
     justify-content: flex-start;
     border-bottom: 1px solid #ccc;
+    align-items: center;
 }
 
 .moment-content {
@@ -240,3 +241,90 @@ color: inherit;
     z-index: 1000; /* 다른 요소 위에 있도록 */
 }
 
+.menu-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 1000;
+}
+
+/* 사이드바 초기 상태 (왼쪽 밖으로 숨김) */
+.side-menu {
+  position: absolute;
+  top: 0;
+  left: -300px; /* 컨테이너 왼쪽 밖 */
+  width: 300px;
+  height: 100%;
+  background-color: #0B70FE;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  transition: left 0.3s ease;
+  z-index: 1001;
+  border-radius: 30px;
+}
+
+/* 메뉴 열렸을 때 */
+.side-menu.open {
+  left: 0;
+}
+
+/* 오버레이 보이게 */
+.menu-overlay.show {
+  display: block;
+}
+
+.menu-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    align-items: flex-start;
+    padding-left: 0;
+    margin-bottom: 16px;
+    margin-top: 50px;
+}
+
+.menu-items li {
+    margin-bottom: 16px;
+    color: #FFF;
+text-align: center;
+
+}
+
+.menu-itm {
+    border-bottom: 1px solid #FFFFFF;
+    width: 100%;
+    height: inherit;
+}
+
+.menu-itm:first-child {
+    border-top: 1px solid #fff;
+    padding-top: 16px;
+}
+
+.menu-itm a{
+    font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+color: #FFF;
+}
+
+a {
+    text-decoration: none;
+    
+    
+}
+
+.menu-logo {
+    margin-top: 100px;
+}
+
+.profile-img {
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+}

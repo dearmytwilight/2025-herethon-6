@@ -18,7 +18,7 @@
                     <img src="{% static 'assets/logo.svg' %}" alt="logo">
                     <div class="tab">
                         <img class=btn src="{% static 'assets/search.svg' %}" alt="search">
-                        <img class=btn src="{% static 'assets/menu.svg' %}" alt="menu">
+                        <img class=btn id="openMenu" src="{% static 'assets/menu.svg' %}" alt="menu">
                     </div>
                 </div>
                     <div class="categories">
@@ -40,7 +40,8 @@
                 </div>
                 <div class="entire">
                     {% for moment in top3_overall %}
-                        <div class="moment-item">
+                        <div class="moment-item"> 
+                            <img class="profile-img" src="{% static 'assets/fire.svg' %}" alt="profile">
                             <div class="moment-content">
                                 "<a href="{% url 'moments:moment_detail_view' moment.moment_id %}">{{ moment.title }}</a>"
                             </div>
@@ -81,10 +82,97 @@
         <div id="nb">
             {% include "components/navbar.html" %}
         </div>
+                <!-- 햄버거 메뉴 오버레이 & 사이드 메뉴 -->
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+        <div id="sideMenu" class="side-menu">
+      <ul class="menu-items">
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 1 %}">연애</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 2 %}">인간관계</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 3 %}">취업/커리어</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 4 %}">건강</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 5 %}">학업</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 6 %}">취미</a></li>        
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 7 %}">소비</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="{% url 'moments:moment_list_view' 8 %}">기타</a></li>
+        </div>
+        <div class="menu-itm">
+          <li><a href="/users/profile/">마이페이지</a></li>
+        </div>
+      </ul>
+      <div class="menu-logo">
+        <img src="{% static 'assets/logo2.svg' %}" alt="Oopsie logo" />
+      </div>
+    </div>
     </div>
     <script>
-        const category = parseInt("{{ selected_category }}");
+        const category = parseInt("{{ selected_category.category_id }}");
     </script>
     <script src="{% static 'js/main.js' %}"></script>
+      <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const randomProfileImages = [
+        "{% static 'assets/profile1.svg' %}",
+        "{% static 'assets/profile2.svg' %}",
+        "{% static 'assets/profile3.svg' %}",
+        "{% static 'assets/profile4.svg' %}"
+      ];
+
+      const profileImages = document.querySelectorAll('.profile-img');
+
+      profileImages.forEach(img => {
+        const randomIndex = Math.floor(Math.random() * randomProfileImages.length);
+        img.src = randomProfileImages[randomIndex];
+      });
+    });
+  </script>
+
+  <script>
+    const openBtn = document.getElementById("openMenu");
+    const sideMenu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("menuOverlay");
+
+    openBtn.addEventListener("click", () => {
+      sideMenu.classList.add("open");
+      overlay.style.display = "block";
+    });
+
+    overlay.addEventListener("click", () => {
+      sideMenu.classList.remove("open");
+      overlay.style.display = "none";
+    });
+  </script>
+       <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const randomProfileImages = [
+        "{% static 'assets/profile1.svg' %}",
+        "{% static 'assets/profile2.svg' %}",
+        "{% static 'assets/profile3.svg' %}",
+        "{% static 'assets/profile4.svg' %}"
+      ];
+
+      const profileImages = document.querySelectorAll('.profile-img');
+
+      profileImages.forEach(img => {
+        const randomIndex = Math.floor(Math.random() * randomProfileImages.length);
+        img.src = randomProfileImages[randomIndex];
+      });
+    });
+  </script>
 </body>
 </html>

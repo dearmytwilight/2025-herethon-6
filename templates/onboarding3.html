@@ -1,15 +1,20 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>welcome</title>
-    <link rel="stylesheet" href="../css/onboarding3.css" />
+  <link rel="stylesheet" href="{% static 'css/onboarding3.css' %}"/>
 </head>
     <body>
-        <a href="{% url 'users:finish_onboarding' %}">
+        <div class="container">
+    <a href="{% url 'users:finish_onboarding' %}">
     <button>시작하기</button>
     </a>
+        </div>
+    
     <script src="../js/onboarding3.js"></script>
 </body>
 </html>
