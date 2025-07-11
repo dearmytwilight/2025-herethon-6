@@ -82,7 +82,8 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    width: 361px;
+    width: 100%;
+    margin-left: 19px;
 }
 
 .top3-ex {
@@ -108,7 +109,10 @@ line-height: normal;
 }
 
 .post {
+    display: flex;
+    flex-direction: column;
     margin-left: 19px;
+    margin-right: 19px;
 }
 
 .categoryName {
@@ -133,13 +137,33 @@ line-height: normal;
     margin-top: 9px;
     list-style: none;
     width: 361px;
-    height: 292px;
-    flex-shrink: 0;
 }
 
+/* 전체 인기글 프로필 이미지, 타이틀 정렬 */
+.moment-item {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    border-bottom: 1px solid #ccc;
+}
+
+.moment-content {
+    margin: 10px 0px 10px 19px; 
+}
+
+.moment-item:last-child {
+    border-bottom: none;
+}
+
+/* 하이퍼 링크 제거 */
+.moment-item a {
+text-decoration: none;
+color: inherit;
+}
+
+ /* 세부 카테고리 목록, 점 제거 */
 .post-list {
-    width: 361px;
-    height: 270px;
+    list-style: none;
     flex-shrink: 0;
     border-radius: 31px;
     border: 1px solid #B0B9C2;
@@ -147,39 +171,48 @@ line-height: normal;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+  }
+
+.post-content-all {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
 }
 
-.post-item {
-    padding: 20px 10px 20px 20px;
-    border-bottom: 1px solid #B0B9C2;
-    cursor: pointer;
+.post-content-all:last-child {
+    border: none;
 }
+  
+/*top3글 타이틀, 컨텐츠 열로 정렬*/
+  .post-list li {
+    display: flex;
+    flex-direction: column;  
+    align-items: flex-start;
+    margin: 10px 0px 10px 19px; 
+  }
 
-.title {
-    color: #0B70FE;
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+/*title 하이퍼링크 제거*/
+.post-list a {
+    text-decoration: none;
+    color: #358FFF;
 }
-
-.content-summary {
-    color: #9D9D9D;
-    font-family: Inter;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-top: 5px;
-}
-
-
-/* 마지막 항목은 border-bottom 제거 */
-.post-item:last-child {
+  
+ /*마지막 컨텐츠는 border-bottom 없음*/ 
+  .post-list li:last-child {
     border-bottom: none;
-}
-
+  }
+  
+  .post-list li a strong {
+    font-size: 16px;
+    margin-bottom: 4px;       /* 제목과 본문 사이 간격 */
+  }
+  
+  .post-content {
+    font-size: 14px;
+    color: #666;
+  }
+  
 .scroll {
     flex: 1;
     overflow-y: auto;

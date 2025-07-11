@@ -1,4 +1,3 @@
-
 fetch("/static/components/navbar.html")
   .then(res => res.text())
   .then(data => {
