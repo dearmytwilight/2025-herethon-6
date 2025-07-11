@@ -6,12 +6,10 @@
     <title>welcome</title>
     <link rel="stylesheet" href="../css/onboarding3.css" />
 </head>
-<body>
-    <div class="container">
-        <button onclick="goMain()">
-            시작하기
-        </button>
-    </div>
+    <body>
+        <a href="{% url 'finish_onboarding' %}">
+    <button>시작하기</button>
+    </a>
     <script src="../js/onboarding3.js"></script>
 </body>
 </html>

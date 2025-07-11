@@ -37,6 +37,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     margin-top: 16px;
+    justify-content: center;
 }
 
 .categories a {
@@ -44,7 +45,7 @@
 }
 
 .categories a button {
-    width: 80px;
+    width: 85px;
     height: 40px;
     flex-shrink: 0;
     background-color: #fff;

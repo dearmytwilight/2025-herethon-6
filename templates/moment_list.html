@@ -6,101 +6,153 @@
   <link rel="stylesheet" href="{% static 'css/moment_list.css' %}">
 </head>
 <body>
-    <div class="container">
-        <div class="scroll">
+  <div class="container">
+    <div class="scroll">
 
-            <div class="header">
-                <div class="top">
-                    <img src="{% static 'assets/logo.svg' %}" alt="logo">
-                    <div class="tab">
-                        <img class=btn src="{% static 'assets/search.svg' %}" alt="search">
-                        <img class=btn src="{% static 'assets/menu.svg' %}" alt="menu">
-                    </div>
-                </div>
-                    <div class="categories">
-                        <a href="{% url 'moments:moment_list_view' 1 %}"><button data-category="1">연애</button></a>
-                        <a href="{% url 'moments:moment_list_view' 2 %}"><button data-category="2">인간관계</button></a>
-                        <a href="{% url 'moments:moment_list_view' 3 %}"><button data-category="3">취업/커리어</button></a>
-                        <a href="{% url 'moments:moment_list_view' 4 %}"><button data-category="4">건강</button></a>
-                        <a href="{% url 'moments:moment_list_view' 5 %}"><button data-category="5">학업</button></a>
-                        <a href="{% url 'moments:moment_list_view' 6 %}"><button data-category="6">취미</button></a>
-                        <a href="{% url 'moments:moment_list_view' 7 %}"><button data-category="7">소비</button></a>
-                        <a href="{% url 'moments:moment_list_view' 8 %}"><button data-category="8">기타</button></a>
-                    </div>           
-            </div>      
-
-            <div class="top3">
-                <p class="top3-name">TOP3&nbsp;<span id="keyword">키워드</span></p>
-                <div class="list">
-                    {% if top_keywords %}
-                        {% for keyword in top_keywords %}
-                            <div class="box">{{ keyword }}</div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="box">아직이에요</div>
-                        <div class="box">글작성을</div>
-                        <div class="box">해보세요!</div>
-                    {% endif %}
-                </div>
-            </div>
-
-
-            <div class="if-content">
-                <!--category_name 데이터 삽입-->
-                사람들이 말하는 {{ selected_category.name }} 분야에서
-                <span class="highlight">내가 다시 돌아간다면?</span>
-
-                <!--if 글 목록-->
-                <div class="content-box">
-                    <!--if 데이터 삽입-->
-                    {% for if in ifs %}
-                    <div class="if-item">
-                        <div class="profile">
-                            <!--이미지 데이터 수정하기-->
-                            <img src="{% static 'assets/fire.svg' %}" alt="profile">
-                        </div>
-                        <div class="if-item-box">{{ if.if_content }}</div>
-                    </div>
-                    <hr class="if"/>
-                    {% endfor %}
-                </div>
-
-            </div>
-
-            <!--전체 글 목록-->
-            <div class="moments">
-                <div class="order">
-                    <a href="?type={{ category.name }}&sort=popular">
-                        <button class="sortBtn {% if request.GET.sort == 'popular' %}active{% endif %}">인기순</button>
-                    </a>
-                    <a href="?type={{ category.name }}&sort=latest">
-                        <button class="sortBtn {% if request.GET.sort == 'latest' or not request.GET.sort %}active{% endif %}">최신순</button>
-                    </a>
-                </div>
-                <hr />
-
-                <!--img, title 데이터 삽입-->
-                {% for moment in moments %}
-                <a href="{% url 'moments:moment_detail_view' moment.moment_id %}" class="moment-link">
-                <div class="moment">
-                    <div class="profile">
-                        <!--이미지데이터 수정하기-->
-                        <img src="{% static 'assets/fire' %}" alt="profile">
-                    </div>
-                    <div class="m-content">{{ moment.title }}</div>
-                </div>
-                </a>
-                <hr />
-                {% endfor %}
-            </div>
+      <div class="header">
+        <div class="top">
+          <img src="{% static 'assets/logo.svg' %}" alt="logo">
+          <div class="tab">
+            <img class="btn" src="{% static 'assets/search.svg' %}" alt="search">
+            <img class="btn" id="openMenu" src="{% static 'assets/menu.svg' %}" alt="menu">
+          </div>
         </div>
-        <div id="nb">
-            {% include "components/navbar.html" %}
+        <div class="categories">
+          <a href="{% url 'moments:moment_list_view' 1 %}"><button data-category="1">연애</button></a>
+          <a href="{% url 'moments:moment_list_view' 2 %}"><button data-category="2">인간관계</button></a>
+          <a href="{% url 'moments:moment_list_view' 3 %}"><button data-category="3">취업/커리어</button></a>
+          <a href="{% url 'moments:moment_list_view' 4 %}"><button data-category="4">건강</button></a>
+          <a href="{% url 'moments:moment_list_view' 5 %}"><button data-category="5">학업</button></a>
+          <a href="{% url 'moments:moment_list_view' 6 %}"><button data-category="6">취미</button></a>
+          <a href="{% url 'moments:moment_list_view' 7 %}"><button data-category="7">소비</button></a>
+          <a href="{% url 'moments:moment_list_view' 8 %}"><button data-category="8">기타</button></a>
+        </div>           
+      </div>      
+
+      <div class="top3">
+        <p class="top3-name">TOP3&nbsp;<span id="keyword">키워드</span></p>
+        <div class="list">
+          {% if top_keywords %}
+            {% for keyword in top_keywords %}
+              <div class="box">{{ keyword }}</div>
+            {% endfor %}
+          {% else %}
+            <div class="box">아직이에요</div>
+            <div class="box">글작성을</div>
+            <div class="box">해보세요!</div>
+          {% endif %}
         </div>
+      </div>
+
+      <div class="if-content">
+        사람들이 말하는 {{ selected_category.name }} 분야에서
+        <span class="highlight">내가 다시 돌아간다면?</span>
+
+        <div class="content-box">
+          {% for if in ifs %}
+          <div class="if-item">
+            <div class="profile">
+              <img class="profile-img" src="{% static 'assets/fire.svg' %}" alt="profile">
+            </div>
+            <div class="if-item-box">
+              <a href="{% url 'moments:moment_detail_view' if.moment_id_id %}">{{ if.if_content }}</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="moments">
+        <div class="order">
+          <a href="?type={{ category.name }}&sort=popular">
+            <button class="sortBtn {% if request.GET.sort == 'popular' %}active{% endif %}">인기순</button>
+          </a>
+          <a href="?type={{ category.name }}&sort=latest">
+            <button class="sortBtn {% if request.GET.sort == 'latest' or not request.GET.sort %}active{% endif %}">최신순</button>
+          </a>
+        </div>
+        <hr />
+
+        {% for moment in moments %}
+        <a href="{% url 'moments:moment_detail_view' moment.moment_id %}" class="moment-link">
+          <div class="moment">
+            <div class="profile">
+              <img class="profile-img" src="{% static 'assets/fire.svg' %}" alt="profile">
+            </div>
+            <div class="m-content">{{ moment.title }}</div>
+          </div>
+        </a>
+        <hr />
+        {% endfor %}
+      </div>
+
+
+    </div> <!-- scroll 끝 -->
+
+    <div id="nb">
+      {% include "components/navbar.html" %}
     </div>
-    <script>
-        const category = "{{ selected_category.category_id }}"
-    </script>
-    <script src="{% static 'js/category.js' %}"></script>
+
+
+          <!-- 햄버거 메뉴 오버레이 & 사이드 메뉴 -->
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <div id="sideMenu" class="side-menu">
+      <ul class="menu-items">
+        <li onclick="location.href='{}'">연애</li>
+        <li onclick="location.href='{}'">인간관계</li>
+        <li onclick="location.href='{}'">취업/커리어</li>
+        <li onclick="location.href='{}'">건강</li>
+        <li onclick="location.href='{}'">학업</li>
+        <li onclick="location.href='{}'">취미</li>
+        <li onclick="location.href='{}'">소비</li>
+        <li onclick="location.href='{}'">기타</li>
+        <li onclick="location.href='/users/profile/'">마이페이지</li>
+      </ul>
+      <div class="menu-logo">
+        <img src="{% static 'assets/logo.svg' %}" alt="Oopsie logo" />
+        <p>Oopsie</p>
+      </div>
+    </div>
+  </div> <!-- container 끝 -->
+
+  <script>
+    const category = "{{ selected_category.category_id }}"
+  </script>
+  <script src="{% static 'js/category.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const randomProfileImages = [
+        "{% static 'assets/fire.svg' %}",
+        "{% static 'assets/home.svg' %}",
+        "{% static 'assets/profile.svg' %}",
+        "{% static 'assets/search.svg' %}"
+      ];
+
+      const profileImages = document.querySelectorAll('.profile-img');
+
+      profileImages.forEach(img => {
+        const randomIndex = Math.floor(Math.random() * randomProfileImages.length);
+        img.src = randomProfileImages[randomIndex];
+      });
+    });
+  </script>
+
+  <script>
+    const openBtn = document.getElementById("openMenu");
+    const sideMenu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("menuOverlay");
+
+    openBtn.addEventListener("click", () => {
+      sideMenu.classList.add("open");
+      overlay.style.display = "block";
+    });
+
+    overlay.addEventListener("click", () => {
+      sideMenu.classList.remove("open");
+      overlay.style.display = "none";
+    });
+  </script>
+
 </body>
 </html>
