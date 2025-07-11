@@ -36,4 +36,7 @@
 ---
 
 ## 📸 주요 화면
+<img width="349" height="737" alt="image" src="https://github.com/user-attachments/assets/1074fdce-4a52-4bf2-9540-5bee69e6cce1" />
+<img width="341" height="736" alt="image" src="https://github.com/user-attachments/assets/a5fc1f92-d293-45cd-9f01-af838c733cb6" /><img width="338" height="740" alt="image" src="https://github.com/user-attachments/assets/b2e1c017-465e-4622-b7c1-cee6aae5534f" />
+
 
