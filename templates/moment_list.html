@@ -81,13 +81,15 @@
 
                 <!--img, title 데이터 삽입-->
                 {% for moment in moments %}
+                <a href="{% url 'moments:moment_detail_view' moment.moment_id %}" class="moment-link">
                 <div class="moment">
                     <div class="profile">
                         <!--이미지데이터 수정하기-->
-                        <img src="{{ moment.user_img_url}}">
+                        <img src="{{ moment.user_img_url }}">
                     </div>
                     <div class="m-content">{{ moment.title }}</div>
                 </div>
+                </a>
                 <hr />
                 {% endfor %}
             </div>

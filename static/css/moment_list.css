@@ -13,6 +13,21 @@
     margin-bottom: 17px;
 }
 
+.moment-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.moment-link:hover .m-content {
+  background-color: #f0f0f0; /* 선택적: 마우스 올릴 때 강조 */
+}
+
+.moment {
+  cursor: pointer;
+}
+
 .top {
     display: flex;
     width: 100%;
