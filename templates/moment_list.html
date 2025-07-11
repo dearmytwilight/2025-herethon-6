@@ -57,7 +57,7 @@
                     <div class="if-item">
                         <div class="profile">
                             <!--이미지 데이터 수정하기-->
-                            <img src="{{ if.user_img_url }}" alt="profile">
+                            <img src="{% static 'assets/fire.svg' %}" alt="profile">
                         </div>
                         <div class="if-item-box">{{ if.if_content }}</div>
                     </div>
@@ -71,10 +71,10 @@
             <div class="moments">
                 <div class="order">
                     <a href="?type={{ category.name }}&sort=popular">
-                        <button class="sortBtn">인기순</button>
+                        <button class="sortBtn {% if request.GET.sort == 'popular' %}active{% endif %}">인기순</button>
                     </a>
                     <a href="?type={{ category.name }}&sort=latest">
-                        <button class="sortBtn">최신순</button>
+                        <button class="sortBtn {% if request.GET.sort == 'latest' or not request.GET.sort %}active{% endif %}">최신순</button>
                     </a>
                 </div>
                 <hr />
@@ -85,7 +85,7 @@
                 <div class="moment">
                     <div class="profile">
                         <!--이미지데이터 수정하기-->
-                        <img src="{{ moment.user_img_url }}">
+                        <img src="{% static 'assets/fire' %}" alt="profile">
                     </div>
                     <div class="m-content">{{ moment.title }}</div>
                 </div>
