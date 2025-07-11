@@ -66,17 +66,53 @@
             {% endfor %}
         </div>
 
+        
+        <!-- 💬 댓글 작성 폼 -->
+        {% if request.user.is_authenticated %}
+        <div id="comment_form" class="comment_write">
+        <form method="post" action="/moments/{{ moment.moment_id }}/comments/create/">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ request.user.id }}">
+            <textarea name="content" rows="3" placeholder="댓글을 작성하세요" required></textarea>
+            <button type="submit">작성</button>
+            
+        </form>
+        </div>
+        {% endif %}
+
+
+        <!-- 💬 댓글 목록 -->
         <div class="comment">
-            {% for comment in comments %}
-            <div class="comment_item">
-                <div class="profile_comment">
-                    <img src="{{ comment.user.profile_img_url|default:'{% static \'assets/imges/Group 66.png\' %}' }}" alt="댓글 프로필 이미지" />
-                </div>
-                <div class="comment_text">{{ comment.content }}</div>
+        {% for comment in comments %}
+        <div class="comment_item">
+            <div class="profile_comment">
+            <img src="{{ comment.user.profile_img_url|default:'{% static \'assets/imges/Group 66.png\' %}' }}" alt="댓글 프로필 이미지" />
             </div>
-            {% empty %}
-            <p>댓글이 없습니다.</p>
-            {% endfor %}
+            <div class="comment_text">
+            <p>{{ comment.content }}</p>
+
+            {% if comment.user_id.id == request.user.id %}
+            
+            <!-- ✏️ 댓글 수정 form -->
+            <form method="post" action="/moments/{{ moment.moment_id }}/comments/{{ comment.comment_id }}/update/">
+                {% csrf_token %}
+                <input type="hidden" name="user_id" value="{{ request.user.id }}">
+                <input type="text" name="content" value="{{ comment.content }}" required>
+                <button type="submit">수정</button>
+            </form>
+
+            <!-- ❌ 댓글 삭제 form -->
+            <form method="post" action="/moments/{{ moment.moment_id }}/comments/{{ comment.comment_id }}/delete/" style="margin-top: 5px;">
+                {% csrf_token %}
+                <input type="hidden" name="user_id" value="{{ request.user.id }}">
+                <button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?')">삭제</button>
+            </form>
+            {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>댓글이 없습니다.</p>
+        {% endfor %}
         </div>
     </div>
 
