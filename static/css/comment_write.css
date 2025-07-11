@@ -1,0 +1,176 @@
+.container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.header {
+  display: flex;
+}
+
+.back {
+  margin-top: 16px;
+  margin-left: 14px;
+}
+
+.profile {
+  margin-top: 16px;
+  margin-left: 10px;
+  display: flex;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 24px;
+}
+
+.text {
+  display: flex;
+  margin-top: -10px;
+}
+
+.text1 {
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 30px;
+}
+
+.text2 {
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 80px;
+  margin-top: -40px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input2,
+.input3 {
+  background-image: url(../assets/imges/Rectangle\ 52.png);
+  background-size: cover;
+  background-position: center;
+  width: 354px;
+  height: 215px;
+  position: relative;
+  margin: 20px;
+}
+
+.input2 p,
+.input3 p {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: -7%;
+  margin-left: 10px;
+}
+
+textarea {
+  width: 100%;
+  height: 90%;
+  padding: 8px 25px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: transparent;
+  resize: none;
+  box-sizing: border-box;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.favorite {
+  margin-left: 90%;
+  margin-top: -20px;
+}
+
+.comment_header {
+  display: flex;
+  padding-left: 23px;
+  border-top: 1px solid #9D9D9D;
+  margin-top: 10px;
+}
+
+.like_icon {
+  margin-left: 60px;
+  cursor: pointer;
+}
+
+.comment {
+  overflow-y: auto;
+  height: 50px;
+  background-repeat: no-repeat;
+  margin-left: 30px;
+  border-radius: 8px;
+}
+
+.comment_item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.profile_comment img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  margin-left: -30px;
+}
+
+.comment_text {
+ background-repeat: no-repeat;
+ width: 200px;
+ height: 20px;
+}
+
+.comment_actions {
+  display: flex;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.comment_actions form {
+  display: inline-block;
+}
+
+.comment_write {
+  position: relative;
+  padding: 10px;
+}
+
+.comment_write textarea {
+  background-image: url(../assets/imges/Group\ 72.png);
+  position: absolute;
+  width: 379px;
+  height: 75px;
+  padding: 20px 40px;
+  top: 100px;
+  font-size: 16px;
+  resize: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.comment_write textarea::placeholder {
+  color: #999;
+}
+
+.send {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.send img {
+  width: 20px;
+  height: 20px;
+  margin-top: 95px;
+}
+

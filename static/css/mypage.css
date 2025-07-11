@@ -1,0 +1,121 @@
+.container{
+}
+
+.profile{
+    margin-top: 58px;
+    font-weight: bold;
+}
+
+.profile p {
+    display: flex;
+    justify-content: center;
+}
+
+.mypage{
+    position: relative;
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: bold;
+    gap: 30px;
+    margin-bottom: 67.5px;
+}
+
+.mypage_box{
+    background-image: url(../assets/imges/Rectangle\ 59.png);
+    background-repeat: no-repeat;
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 445px;
+}
+
+.mypage_box ul {
+    position: relative;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section1, .section2, .section3, .section4 ,.section5{
+    img{
+        margin-bottom: -15px;
+        margin-left: 4px;
+    }
+}
+
+
+
+.section1{
+    margin-top: -10%;
+}
+
+.section5{
+    img{display: none;}
+}
+
+.mypage_box li {
+    padding: 16px 20px;
+    position: relative;
+    list-style: none;
+    margin: 16px 0;
+    border-bottom: 1px solid #9D9D9D;
+    text-align: center;
+}
+
+.mypage_box li:last-child {
+  border-bottom: none;
+  img{display: none;}
+}
+
+.mypage_box a {
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.footer{
+    width: 402px;
+    height: 69px;
+    display: flex;
+    margin-top: 65px;
+    background-color: #E0F1FF;
+    border-radius: 30px;
+}
+
+.logo{
+    width: 402px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.link {
+  color: black;            
+  text-decoration: none;  
+  font-size: 15px;
+  font-weight: bolder;
+  margin-top: 15px;
+  display: inline-block;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.link:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.nb {
+    position: absolute;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

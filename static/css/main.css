@@ -1,0 +1,330 @@
+.header {
+    width: 402px;
+    height: 184px;
+    flex-shrink: 0;
+    background: #E0F1FF;
+    background-image: url("../assets/sa.svg"); /* 상대 경로로 */    
+    background-repeat: no-repeat;
+    background-position: bottom;
+    border-radius: 30px 30px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 17px;
+    overflow: hidden;
+}
+
+.top {
+    display: flex;
+    width: 100%;
+    margin-top: 26px;
+    margin-left: 20px;
+    gap: 200px;
+}
+
+.tab {
+    display: flex;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.categories {
+    width: 350px;
+    flex-shrink: 0;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    margin-top: 16px;
+    justify-content: center;
+}
+
+.categories a {
+    height: 40px;
+}
+
+.categories a button {
+    width: 85px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: #fff;
+    border-radius: 31px;
+    border: 1px solid #B0B9C2;
+    color: #000;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.categories button.active {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #FFF;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#popular {
+    margin-bottom: 47px;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    width: 100%;
+    margin-left: 19px;
+}
+
+.top3-ex {
+    display: flex;
+    align-items: center;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    width: 361px;
+    margin-left: 19px;
+}
+
+span {
+    color: #358FFF;
+font-family: Pretendard;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    margin-left: 19px;
+    margin-right: 19px;
+}
+
+.categoryName {
+    color: #358FFF;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: 5px;
+}
+
+.entire {
+    flex-shrink: 0;
+    border-radius: 31px;
+    border: 1px solid #B0B9C2;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    margin-top: 9px;
+    list-style: none;
+    width: 361px;
+}
+
+/* 전체 인기글 프로필 이미지, 타이틀 정렬 */
+.moment-item {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+}
+
+.moment-content {
+    margin: 10px 0px 10px 19px; 
+}
+
+.moment-item:last-child {
+    border-bottom: none;
+}
+
+/* 하이퍼 링크 제거 */
+.moment-item a {
+text-decoration: none;
+color: inherit;
+}
+
+ /* 세부 카테고리 목록, 점 제거 */
+.post-list {
+    list-style: none;
+    flex-shrink: 0;
+    border-radius: 31px;
+    border: 1px solid #B0B9C2;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+  }
+
+.post-content-all {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+
+.post-content-all:last-child {
+    border: none;
+}
+  
+/*top3글 타이틀, 컨텐츠 열로 정렬*/
+  .post-list li {
+    display: flex;
+    flex-direction: column;  
+    align-items: flex-start;
+    margin: 10px 0px 10px 19px; 
+  }
+
+/*title 하이퍼링크 제거*/
+.post-list a {
+    text-decoration: none;
+    color: #358FFF;
+}
+  
+ /*마지막 컨텐츠는 border-bottom 없음*/ 
+  .post-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .post-list li a strong {
+    font-size: 16px;
+    margin-bottom: 4px;       /* 제목과 본문 사이 간격 */
+  }
+  
+  .post-content {
+    font-size: 14px;
+    color: #666;
+  }
+  
+.scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 80px;
+  
+    /* ✅ 스크롤바 숨기기 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+  }
+  
+.scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+
+  #nb {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 402px; /* 앱 디자인 폭 제한 */
+    gap: 80px;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 0 0 30px 30px;
+    z-index: 1000; /* 다른 요소 위에 있도록 */
+}
+
+.menu-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 1000;
+}
+
+/* 사이드바 초기 상태 (왼쪽 밖으로 숨김) */
+.side-menu {
+  position: absolute;
+  top: 0;
+  left: -300px; /* 컨테이너 왼쪽 밖 */
+  width: 300px;
+  height: 100%;
+  background-color: #0B70FE;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  transition: left 0.3s ease;
+  z-index: 1001;
+  border-radius: 30px;
+}
+
+/* 메뉴 열렸을 때 */
+.side-menu.open {
+  left: 0;
+}
+
+/* 오버레이 보이게 */
+.menu-overlay.show {
+  display: block;
+}
+
+.menu-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    align-items: flex-start;
+    padding-left: 0;
+    margin-bottom: 16px;
+    margin-top: 50px;
+}
+
+.menu-items li {
+    margin-bottom: 16px;
+    color: #FFF;
+text-align: center;
+
+}
+
+.menu-itm {
+    border-bottom: 1px solid #FFFFFF;
+    width: 100%;
+    height: inherit;
+}
+
+.menu-itm:first-child {
+    border-top: 1px solid #fff;
+    padding-top: 16px;
+}
+
+.menu-itm a{
+    font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+color: #FFF;
+}
+
+a {
+    text-decoration: none;
+    
+    
+}
+
+.menu-logo {
+    margin-top: 100px;
+}
+
+.profile-img {
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+}

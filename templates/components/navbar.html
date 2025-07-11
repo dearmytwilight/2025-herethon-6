@@ -1,0 +1,17 @@
+{% load static %}
+
+<head>
+  <link rel="stylesheet" href="{% static 'css/common/navbar.css' %}">
+</head>
+
+<nav class="navbar">
+  <a href="{% url 'main' %}">
+    <img src="{% static 'assets/home.svg' %}" alt="홈" />
+  </a>
+  <a href="{% url 'moments:moment_create_view' %}">
+    <img src="{% static 'assets/write.svg' %}" alt="글쓰기" />
+  </a>
+  <a href="{% url 'users:mypage' %}">
+    <img src="{% static 'assets/profile.svg' %}" alt="프로필" />
+  </a>
+</nav>

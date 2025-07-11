@@ -1,0 +1,10 @@
+.navbar {
+    display: flex;
+    background: #E0F1FF;
+    height: 69px;
+    gap: 80px;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 0 0 30px 30px;
+    width: 100%;
+  }
