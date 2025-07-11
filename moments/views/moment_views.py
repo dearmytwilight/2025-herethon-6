@@ -65,12 +65,19 @@ def moment_list_view(request, category_id):
 
 def moment_detail_view(request, moment_id):
     moment = get_object_or_404(Moment, moment_id=moment_id)
+    
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        user = request.user
+        if content and user.is_authenticated:
+            Comment.objects.create(moment_id=moment, user=user, content=content)
+        
+
     images = Image.objects.filter(moment_id=moment_id)       
-    comments = Comment.objects.filter(moment_id=moment)    
+    comments = Comment.objects.filter(moment_id=moment)
     comment_count = comments.count()
     like_count = Like.objects.filter(moment=moment).count()
-
-    if_contents = If.objects.filter(moment_id=moment).order_by('created_date')
+    if_contents = If.objects.filter(moment_id=moment_id).order_by('-created_date')
 
     return render(request, 'moment_detail.html', {
         'moment': moment,
