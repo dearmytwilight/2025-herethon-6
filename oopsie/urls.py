@@ -16,14 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from django.shortcuts import redirect
 from moments.views.moment_views import main
 
 urlpatterns = [
+    path('', lambda request: redirect('users:onboarding1'), name='root_redirect'),
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('moments/', include('moments.urls')),
-    path('pages/moments/', include('moments.pages_urls', namespace='moments')), # 페이지 렌더는 pages/로 시작!
-    path('main/', main, name='main'), 
+    path('pages/moments/', include('moments.pages_urls', namespace='moments')),
+    path('main/', main, name='main'),
 ]
-

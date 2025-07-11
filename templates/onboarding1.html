@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,7 +23,7 @@
         </div>
     </div>    <script>
         setTimeout(() => {
-            window.location.href = "onboarding2.html"
+            window.location.href = "{% url 'users:onboarding2' %}";
         }, 3000);
     </script>
 </body>
